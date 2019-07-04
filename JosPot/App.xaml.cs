@@ -10,7 +10,12 @@ namespace JosPot
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new MainPage()
+            {
+                BackgroundColor = Color.Red,
+            };
+            MainPage.SetValue(NavigationPage.BarBackgroundColorProperty, Color.Black);
+            MainPage.SetValue(NavigationPage.BarTextColorProperty, Color.Black);
         }
 
         protected override void OnStart()

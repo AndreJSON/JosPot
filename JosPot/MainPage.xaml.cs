@@ -13,6 +13,39 @@ namespace JosPot
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        public MainPage()
+        {
+            InitializeComponent();
+
+            catEarPath.MoveTo(0, 0);
+            catEarPath.LineTo(0, 75);
+            catEarPath.LineTo(100, 75);
+            catEarPath.Close();
+
+            catEyePath.MoveTo(0, 0);
+            catEyePath.ArcTo(50, 50, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 50, 0);
+            catEyePath.ArcTo(50, 50, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 0, 0);
+            catEyePath.Close();
+
+            catPupilPath.MoveTo(25, -5);
+            catPupilPath.ArcTo(6, 6, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 25, 5);
+            catPupilPath.ArcTo(6, 6, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 25, -5);
+            catPupilPath.Close();
+
+            catTailPath.MoveTo(0, 100);
+            catTailPath.CubicTo(50, 200, 0, 250, -50, 200);
+
+
+
+
+
+            Device.StartTimer(TimeSpan.FromSeconds(1f / 60), () =>
+            {
+                CanvasView.InvalidateSurface();
+                return true;
+            });
+        }
+
         SKPaint blackFillPaint = new SKPaint
         {
             Style = SKPaintStyle.Fill,
@@ -55,50 +88,13 @@ namespace JosPot
         SKPath catPupilPath = new SKPath();
         SKPath catTailPath = new SKPath();
 
-        public MainPage()
-        {
-            InitializeComponent();
-
-            catEarPath.MoveTo(0, 0);
-            catEarPath.LineTo(0, 75);
-            catEarPath.LineTo(100, 75);
-            catEarPath.Close();
-
-            catEyePath.MoveTo(0, 0);
-            catEyePath.ArcTo(50, 50, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 50, 0);
-            catEyePath.ArcTo(50, 50, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 0, 0);
-            catEyePath.Close();
-
-            catPupilPath.MoveTo(25, -5);
-            catPupilPath.ArcTo(6, 6, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 25, 5);
-            catPupilPath.ArcTo(6, 6, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 25, -5);
-            catPupilPath.Close();
-
-            catTailPath.MoveTo(0, 100);
-            catTailPath.CubicTo(50, 200, 0, 250, -50, 200);
-
-
-
-
-
-            Device.StartTimer(TimeSpan.FromSeconds(1f / 60), () =>
-               {
-                   CanvasView.InvalidateSurface();
-                   return true;
-               });
-        }
-
         private void CanvasView_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            SKSurface surface = e.Surface;
-            SKCanvas canvas = surface.Canvas;
-
-            canvas.Clear(SKColors.CornflowerBlue);
-
+            SKCanvas canvas = e.Surface.Canvas;
             int width = e.Info.Width;
             int height = e.Info.Height;
 
-            // Set transforms
+            canvas.Clear(SKColors.Black);
             canvas.Translate(width / 2, height / 2);
             canvas.Scale(Math.Min(width/210f,height/520f));
 
