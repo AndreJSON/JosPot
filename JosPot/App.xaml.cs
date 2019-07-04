@@ -14,8 +14,6 @@ namespace JosPot
             {
                 BackgroundColor = Color.Red,
             };
-            MainPage.SetValue(NavigationPage.BarBackgroundColorProperty, Color.Black);
-            MainPage.SetValue(NavigationPage.BarTextColorProperty, Color.Black);
         }
 
         protected override void OnStart()

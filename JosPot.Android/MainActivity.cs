@@ -22,6 +22,19 @@ namespace JosPot.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
+            EnterFullscreenMode();
+
+            LoadApplication(new App());
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            EnterFullscreenMode();
+        }
+
+        private void EnterFullscreenMode()
+        {
             Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
             Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
             Window.AddFlags(WindowManagerFlags.KeepScreenOn);
@@ -35,9 +48,8 @@ namespace JosPot.Droid
             uiOptions |= (int)SystemUiFlags.ImmersiveSticky;
             uiOptions |= (int)SystemUiFlags.LayoutStable;
             Window.DecorView.SystemUiVisibility = (StatusBarVisibility)uiOptions;
-
-            LoadApplication(new App());
         }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
