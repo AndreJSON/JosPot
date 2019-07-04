@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
+using JosPot.Entities;
 
 namespace JosPot
 {
@@ -49,26 +50,33 @@ namespace JosPot
 
         private void DrawBackground(SKCanvas c, float width, float height)
         {
-            c.Clear(SKColors.Black);
+            c.Clear(new SKColor(15,15,15));
             c.DrawRect(0, 0, width, height, WhiteStrokePaint);
+
+            var stars = new List<Entity>();
+            var f = new EntityFactory();
+            stars.Add(f.CreateStar());
+            foreach(var s in stars)
+            {
+                c.Save();
+                s.Draw(c);
+                c.Restore();
+            }
         }
 
         private void DrawGameArea(SKCanvas c, float width, float height)
         {
             c.DrawRect(0, 0, width, height, WhiteStrokePaint);
-            c.DrawCircle(7, 7, 2, WhiteStrokePaint);
         }
 
         private void DrawTopBar(SKCanvas c, float width, float height)
         {
             c.DrawRect(0, 0, width, height, WhiteStrokePaint);
-            c.DrawCircle(7, 7, 2, WhiteStrokePaint);
         }
 
         private void DrawMenu(SKCanvas c, float width, float height)
         {
             c.DrawRect(0, 0, width, height, WhiteStrokePaint);
-            c.DrawCircle(7, 7, 2, WhiteStrokePaint);
             //Topdelen av menyn kanske kan ritas men nån slags bezierkurva
         }
 
