@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SkiaSharp;
+﻿using SkiaSharp;
 
 namespace JosPot.Entities
 {
@@ -14,6 +11,8 @@ namespace JosPot.Entities
         public Star(float scale)
         {
             this.scale = scale;
+            X = 3;
+            Y = 3;
 
             paint = new SKPaint() {
                 IsAntialias = true,
@@ -35,9 +34,11 @@ namespace JosPot.Entities
 
         public override void Draw(SKCanvas canvas)
         {
-            canvas.Translate(3, 3);
+            canvas.Save();
+            canvas.Translate(X, Y);
             canvas.Scale(scale);
             canvas.DrawPath(path, paint);
+            canvas.Restore();
         }
     }
 }

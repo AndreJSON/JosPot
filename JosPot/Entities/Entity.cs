@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SkiaSharp;
+﻿using SkiaSharp;
 
 namespace JosPot
 {
     public abstract class Entity
     {
-        public abstract void Draw(SKCanvas canvas);
+        public float X { get; set; }
+        public float Y { get; set; }
+        public abstract void Draw(SKCanvas c);
     }
 }
