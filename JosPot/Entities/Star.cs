@@ -8,11 +8,11 @@ namespace JosPot.Entities
         private SKPath path;
         private float scale;
 
-        public Star(float scale)
+        public Star(float x, float y, float scale)
         {
+            X = x;
+            Y = y;
             this.scale = scale;
-            X = 3;
-            Y = 3;
 
             paint = new SKPaint() {
                 IsAntialias = true,
@@ -39,6 +39,11 @@ namespace JosPot.Entities
             canvas.Scale(scale);
             canvas.DrawPath(path, paint);
             canvas.Restore();
+        }
+
+        public override void Move()
+        {
+            Y = Y + scale / 8;
         }
     }
 }

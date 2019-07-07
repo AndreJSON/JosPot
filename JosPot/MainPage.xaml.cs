@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using SkiaSharp.Views.Forms;
 
@@ -13,18 +8,14 @@ namespace JosPot
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        private static readonly int FPS = 60;
         private static GameManager Game;
+        private DateTime previous = DateTime.Now;
+        private TimeSpan lag = TimeSpan.Zero;
+        private TimeSpan update_interval = TimeSpan.FromMilliseconds(1000/60);
 
         public MainPage()
         {
             InitializeComponent();
-
-            Device.StartTimer(TimeSpan.FromSeconds(1f / FPS), () =>
-            {
-                CanvasView.InvalidateSurface();
-                return true;
-            });
         }
 
         private void CanvasView_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
@@ -32,8 +23,24 @@ namespace JosPot
             if (Game == null)
                 Game = new GameManager(e.Info.Width, e.Info.Height);
 
-            Game.Tick();
+            var current = DateTime.Now;
+            lag += current - previous;
+            previous = current;
+
+            var ticksThisDraw = 0;
+            while (lag >= update_interval)
+            {
+                Game.Tick();
+                lag -= update_interval;
+
+                ticksThisDraw++;
+                if (ticksThisDraw >= 4)
+                    lag = TimeSpan.Zero;
+            }
+
             Game.Draw(e.Surface.Canvas);
+
+            CanvasView.InvalidateSurface();
         }
     }
 }

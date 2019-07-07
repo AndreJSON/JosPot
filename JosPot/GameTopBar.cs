@@ -13,7 +13,7 @@ namespace JosPot
         private float width;
         private float height;
         private float scale;
-        private List<Marker> markers;
+        private List<Entity> markers;
 
         public GameTopBar(float x, float y, float width, float height, float scale)
         {
@@ -23,9 +23,9 @@ namespace JosPot
             this.height = height;
             this.scale = scale;
 
-            markers = new List<Marker>
+            markers = new List<Entity>
             {
-                new Marker(X, Y, width, height)
+                //new Marker(X, Y, width, height)
             };
         }
 

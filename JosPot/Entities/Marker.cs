@@ -28,5 +28,10 @@ namespace JosPot.Entities
         {
             c.DrawRect(X, Y, width, height, paint);
         }
+
+        public override void Move()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

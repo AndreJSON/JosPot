@@ -12,6 +12,7 @@ namespace JosPot
         public GameState State;
         public GameTopBar TopBar;
         public GameMenu Menu;
+        public GameOverlay Overlay;
 
         public GameManager(float width, float height)
         {
@@ -33,21 +34,25 @@ namespace JosPot
             float menuWidth = backgroundWidth;
             float menuHeight = backgroundHeight - topBarHeight - gameHeight;
             float menuScale = menuWidth / 100f;
-            Menu = new GameMenu(0, topBarHeight + gameHeight, 100f, menuWidth/menuScale, menuScale);
+            Menu = new GameMenu(0, topBarHeight + gameHeight, 100f, menuHeight/menuScale, menuScale);
+
+            Overlay = new GameOverlay(0, 0, 100f, backgroundHeight / backgroundScale, backgroundScale);
         }
 
         public void Draw(SKCanvas c)
         {
-            c.Clear(new SKColor(15, 15, 15));
+            c.Clear(new SKColor(20, 20, 20));
             Background.Draw(c);
             State.Draw(c);
             TopBar.Draw(c);
             Menu.Draw(c);
+            Overlay.Draw(c);
         }
 
         public void Tick()
         {
-            Debug.WriteLine("hej");
+            Background.Tick();
+            Overlay.Tick();
         }
     }
 }

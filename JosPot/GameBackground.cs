@@ -13,7 +13,7 @@ namespace JosPot
         private float height;
         private float scale;
         private List<Entity> markers;
-        private List<Entity> stars;
+        private List<Entity> stars = new List<Entity>();
 
         public GameBackground(float x, float y, float width, float height, float scale)
         {
@@ -25,12 +25,8 @@ namespace JosPot
 
             markers = new List<Entity>
             {
-                new Marker(X, Y, width, height)
+                //new Marker(X, Y, width, height)
             };
-
-            stars = new List<Entity>();
-            var factory = new EntityFactory();
-            stars.Add(factory.CreateStar());
         }
 
         public void Draw(SKCanvas c)
@@ -43,6 +39,16 @@ namespace JosPot
                 e.Draw(c);
             }
             c.Restore();
+        }
+
+        public void Tick()
+        {
+            stars.ForEach(s => s.Move());
+
+            stars.RemoveAll(s => s.Y > height + 5);
+
+            if (Utils.Rand(0, 100) < 2)
+                stars.Add(EntityFactory.CreateStar(0, width, 0, 0));
         }
     }
 }
