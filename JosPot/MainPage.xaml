@@ -7,9 +7,9 @@
              mc:Ignorable="d"
              x:Class="JosPot.MainPage">
 
-    <skia:SKCanvasView
-    x:Name="CanvasView"
-    PaintSurface="CanvasView_PaintSurface"
+    <skia:SKGLView
+    x:Name="GLView"
+    PaintSurface="GLView_PaintSurface"
     />
 
 </ContentPage>

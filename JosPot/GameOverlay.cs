@@ -49,8 +49,8 @@ namespace JosPot
             var oneSecAgo = DateTime.Now.AddSeconds(-1);
             frames.RemoveAll(f => f <= oneSecAgo);
             frames.Add(DateTime.Now);
-            c.DrawText(frames.Count.ToString(), 5, 10, paint);
-            c.DrawText(ticks.Count.ToString(), 5, 20, paint);
+            c.DrawText(frames.Count.ToString() + " FPS", 5, 10, paint);
+            c.DrawText(ticks.Count.ToString() + " TPS", 5, 20, paint);
         }
 
         public void Tick()

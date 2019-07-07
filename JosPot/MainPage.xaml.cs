@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using Xamarin.Forms;
 using SkiaSharp.Views.Forms;
+using System.Threading.Tasks;
 
 namespace JosPot
 {
@@ -11,17 +12,17 @@ namespace JosPot
         private static GameManager Game;
         private DateTime previous = DateTime.Now;
         private TimeSpan lag = TimeSpan.Zero;
-        private TimeSpan update_interval = TimeSpan.FromMilliseconds(1000f/1000);
+        private TimeSpan update_interval = TimeSpan.FromMilliseconds(1000f/60);
 
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void CanvasView_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        private async void GLView_PaintSurface(object sender, SKPaintGLSurfaceEventArgs e)
         {
             if (Game == null)
-                Game = new GameManager(e.Info.Width, e.Info.Height);
+                Game = new GameManager(e.BackendRenderTarget.Width, e.BackendRenderTarget.Height);
 
             var current = DateTime.Now;
             lag += current - previous;
@@ -40,7 +41,8 @@ namespace JosPot
 
             Game.Draw(e.Surface.Canvas);
 
-            CanvasView.InvalidateSurface();
+            await Task.Delay(10);
+            GLView.InvalidateSurface();
         }
     }
 }
