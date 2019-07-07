@@ -25,7 +25,7 @@ namespace JosPot
 
             markers = new List<Entity>
             {
-                new Marker(X, Y, width, height)
+                //new Marker(X, Y, width, height)
             };
         }
 

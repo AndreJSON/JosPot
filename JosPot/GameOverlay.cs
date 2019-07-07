@@ -46,7 +46,8 @@ namespace JosPot
 
         private void DrawFPS(SKCanvas c)
         {
-            frames = frames.Where(f => f > DateTime.Now.AddSeconds(-1)).ToList();
+            var oneSecAgo = DateTime.Now.AddSeconds(-1);
+            frames.RemoveAll(f => f <= oneSecAgo);
             frames.Add(DateTime.Now);
             c.DrawText(frames.Count.ToString(), 5, 10, paint);
             c.DrawText(ticks.Count.ToString(), 5, 20, paint);
@@ -54,7 +55,8 @@ namespace JosPot
 
         public void Tick()
         {
-            ticks = ticks.Where(t => t > DateTime.Now.AddSeconds(-1)).ToList();
+            var oneSecAgo = DateTime.Now.AddSeconds(-1);
+            ticks.RemoveAll(t => t <= oneSecAgo);
             ticks.Add(DateTime.Now);
         }
     }

@@ -11,7 +11,7 @@ namespace JosPot
         private static GameManager Game;
         private DateTime previous = DateTime.Now;
         private TimeSpan lag = TimeSpan.Zero;
-        private TimeSpan update_interval = TimeSpan.FromMilliseconds(1000/60);
+        private TimeSpan update_interval = TimeSpan.FromMilliseconds(1000f/1000);
 
         public MainPage()
         {
@@ -34,7 +34,7 @@ namespace JosPot
                 lag -= update_interval;
 
                 ticksThisDraw++;
-                if (ticksThisDraw >= 4)
+                if (ticksThisDraw >= 40)
                     lag = TimeSpan.Zero;
             }
 
