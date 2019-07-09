@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SkiaSharp;
 using JosPot.Entities;
@@ -25,12 +26,13 @@ namespace JosPot
 
             markers = new List<Entity>
             {
-                //new Marker(X, Y, width, height)
+                //new Marker(0, 0, width, height)
             };
         }
 
         public void Draw(SKCanvas c)
         {
+            c.Clear(new SKColor(20, 20, 20));
             c.Save();
             c.Translate(X, Y);
             c.Scale(scale);

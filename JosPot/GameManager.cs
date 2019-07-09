@@ -22,7 +22,7 @@ namespace JosPot
             Background = new GameBackground(0, 0, 100f, backgroundHeight/backgroundScale, backgroundScale);
 
             float topBarWidth = backgroundWidth;
-            float topBarHeight = backgroundWidth * 0.13f;
+            float topBarHeight = backgroundWidth * 0.12f;
             float topBarScale = topBarWidth / 100f;
             TopBar = new GameTopBar(0, 0, 100f, topBarHeight/topBarScale, topBarScale);
 
@@ -41,7 +41,6 @@ namespace JosPot
 
         public void Draw(SKCanvas c)
         {
-            c.Clear(new SKColor(20, 20, 20));
             Background.Draw(c);
             State.Draw(c);
             TopBar.Draw(c);

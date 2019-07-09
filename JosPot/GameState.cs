@@ -14,6 +14,7 @@ namespace JosPot
         private float height;
         private float scale;
         private List<Entity> markers;
+        private Player player;
 
         public GameState(float x, float y, float width, float height, float scale)
         {
@@ -25,8 +26,10 @@ namespace JosPot
 
             markers = new List<Entity>
             {
-                //new Marker(X, Y, width, height)
+                //new Marker(0, 0, width, height)
             };
+
+            player = new Player(46, 120, 1);
         }
 
         public void Draw(SKCanvas c)
@@ -34,6 +37,7 @@ namespace JosPot
             c.Save();
             c.Translate(X, Y);
             c.Scale(scale);
+            player.Draw(c);
             foreach (var m in markers)
             {
                 m.Draw(c);
