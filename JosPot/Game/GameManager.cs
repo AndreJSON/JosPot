@@ -45,13 +45,13 @@ namespace JosPot
             State.Draw(c);
             TopBar.Draw(c);
             Menu.Draw(c);
-            Overlay.Draw(c);
+            //Overlay.Draw(c);
         }
 
         public void Tick()
         {
             Background.Tick();
-            Overlay.Tick();
+            //Overlay.Tick();
         }
     }
 }
